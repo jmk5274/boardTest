@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="post">
+	<select id="getPostList" parameterType="map" resultType="postVo">
+       select  *
+       from   (select rownum rn, a.*
+               from  (select postnum, postnm, postcont, postdate, delstatus, userid, boardnum, postnum2, gn, level
+                       from post
+                      start with postnum2 is null
+                    connect by prior postnum = postnum2
+                      order siblings by gn desc, postnum)a
+                where boardnum = #{boardNum})a
+        where a.rn between (#{pagesize} * (#{page} - 1)) + 1 and (#{pagesize} * #{page})
+	</select>
+	
+	<select id="selectPost" parameterType="int" resultType="postVo">
+		select * from post where postnum = #{data}
+	</select>
+	
+	<select id="getPostSeq" resultType="int">
+		select post_seq.nextval from dual
+	</select>
+	
+	<insert id="insertPost" parameterType="postVo">
+		insert into post(postnum, postnm, postcont, postdate, delstatus, userid, boardnum, gn)
+   			values(#{postnum}, #{postnm}, #{postcont}, sysdate, 'N', #{userid}, #{boardnum}, gn_seq.nextval)
+	</insert>
+	
+	<insert id="insertPost2" parameterType="postVo">
+		insert into post(postnum, postnm, postcont, postdate, delstatus, userid, boardnum, postnum2, gn)
+   			values(#{postnum}, #{postnm}, #{postcont}, sysdate, 'N', #{userid}, #{boardnum}, #{postnum2}, #{gn})
+	</insert>
+	
+</mapper>
