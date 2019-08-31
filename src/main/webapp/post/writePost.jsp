@@ -92,9 +92,9 @@ function validation(){
 				<form id="frm" class="form-horizontal" role="form" action="${cp }/writePost"
 					method="post" enctype="multipart/form-data">
 					<div class="form-group">
-					<input type="hidden" name="boardNum" value="${boardNum }"/>
-					<input type="hidden" name="postNum2" value="${postNum2 }"/>
-					<input type="hidden" name="gn" value="${gn }"/>
+						<input type="hidden" name="boardNum" value="${boardNum }"/>
+						<input type="hidden" name="postNum2" value="${postNum2 }"/>
+						<input type="hidden" name="gn" value="${gn }"/>
 						<label for="postNm" class="col-sm-2 control-label">제목</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="postNm" name="postNm"
@@ -113,15 +113,7 @@ function validation(){
 						<label for="attachedFile" class="col-sm-2 control-label">첨부파일</label>
 						<div class="col-sm-6">
 							<input type="file" class="form-control" id="attachedFile" name="attachedFile"
-								placeholder="첨부파일" >
-							<input type="file" class="form-control" id="attachedFile" name="attachedFile"
-								placeholder="첨부파일" >
-							<input type="file" class="form-control" id="attachedFile" name="attachedFile"
-								placeholder="첨부파일" >
-							<input type="file" class="form-control" id="attachedFile" name="attachedFile"
-								placeholder="첨부파일" >
-							<input type="file" class="form-control" id="attachedFile" name="attachedFile"
-								placeholder="첨부파일" >
+								placeholder="첨부파일" multiple="multiple"/>
 						</div>
 					</div>
 

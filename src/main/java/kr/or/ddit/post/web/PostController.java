@@ -38,6 +38,8 @@ public class PostController extends HttpServlet {
 			boardNum = (String) request.getAttribute("boardNum");
 		}
 		
+		List<PostVo> pageList = postServ.allPostList(Integer.parseInt(boardNum));
+		
 		int page = pageStr==null ? 1 : Integer.parseInt(pageStr);
 		int pagesize = pagesizeStr==null ? 10 : Integer.parseInt(pagesizeStr);
 
@@ -48,7 +50,7 @@ public class PostController extends HttpServlet {
 		map.put("pagesize", pagesize);
 		
 		List<PostVo> list = postServ.getPostList(map);
-		int paginationSize = (int)Math.ceil((double)list.size()/pagesize);
+		int paginationSize = (int)Math.ceil((double)pageList.size()/pagesize);
 		
 		request.setAttribute("boardNum", boardNum);
 		request.setAttribute("postList", list);

@@ -59,16 +59,10 @@ public class PostServiceImpl implements IPostService {
 	@Override
 	public int insertPost(Map map) {
 		SqlSession sqlSession = MybatisUtil.getSession();
-		int seq = dao.getPostSeq(sqlSession);
+
 		PostVo pvo = (PostVo) map.get("pvo");
-//		AttachedfileVo avo = (AttachedfileVo) map.get("avo");
-		
-		pvo.setPostnum(seq);
-//		avo.setPostnum(seq);
 		
 		int cnt = dao.insertPost(sqlSession, pvo);
-		
-//		cnt = dao.insertAtf(sqlSession, avo);
 		
 		sqlSession.commit();
 		sqlSession.close();
@@ -80,17 +74,41 @@ public class PostServiceImpl implements IPostService {
 		SqlSession sqlSession = MybatisUtil.getSession();
 		int seq = dao.getPostSeq(sqlSession);
 		PostVo pvo = (PostVo) map.get("pvo");
-//		AttachedfileVo avo = (AttachedfileVo) map.get("avo");
-		
-		pvo.setPostnum(seq);
-//		avo.setPostnum(seq);
 		
 		int cnt = dao.insertPost2(sqlSession, pvo);
 		
-//		cnt = dao.insertAtf(sqlSession, avo);
 		sqlSession.commit();
 		sqlSession.close();
 		return 0;
+	}
+
+	@Override
+	public List<PostVo> allPostList(int boardNum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		
+		List<PostVo> list = dao.allPostList(sqlSession, boardNum);
+		
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
+	}
+
+	@Override
+	public int getPostSeq() {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int seq = dao.getPostSeq(sqlSession);
+		sqlSession.commit();
+		sqlSession.close();
+		return seq;
+	}
+
+	@Override
+	public int insertAtf(AttachedfileVo atfVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int cnt = dao.insertAtf(sqlSession, atfVo);
+		sqlSession.commit();
+		sqlSession.close();
+		return cnt;
 	}
 	
 }

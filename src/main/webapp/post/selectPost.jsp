@@ -29,6 +29,7 @@
 <form action="${cp }/deleteCmt" method="post" id="hiddenFrm">
 	<input type="hidden" id="cmtNum" name="cmtNum" />
 </form>
+
 	<!-- header -->
 	<%@ include file="/commonJsp/header.jsp"%>
 
@@ -43,10 +44,15 @@
 
 			<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
 
-				<form id="frm" class="form-horizontal" role="form" action="${cp }/modifyUser"
-					method="post" enctype="multipart/form-data">
+				<form id="frm" class="form-horizontal" role="form" action="${cp }/modifyPost"
+					method="get" enctype="multipart/form-data">
 
 					<div class="form-group">
+						<input type="hidden" name="boardNum" value="${boardNum }"/>
+						<input type="hidden" name="postNum2" value="${pvo.postnum }"/>
+						<input type="hidden" name="gn" value="${pvo.gn }"/>
+						<input type="hidden" name="postNm" value="${pvo.postnm }"/>
+						<input type="hidden" name="postCont" value="${pvo.postcont }"/>
 						<label for="postNm" class="col-sm-2 control-label">제목</label>
 						<div class="col-sm-6">
 	                    	<label class="control-label">${pvo.postnm } </label>
@@ -69,9 +75,9 @@
 					<div class="form-group">
 						<label for="attachedFile" class="col-sm-2 control-label"></label>
 						<div class="col-sm-6">
-							<input type="button" class="btn btn-default" id="btnUpdqteCmt" name="btnUpdqtePost" value="수정"/>
-							<input type="button" class="btn btn-default" id="btnDelCmt" name="btnDelPost" value="삭제"/>
-							<input type="button" class="btn btn-default" id="btnAnsCmt" name="btnAnsPost" value="답글"/>
+							<input type="submit" class="btn btn-default" id="btnUpdqtePost" name="btnValue" value="수정"/>
+							<input type="submit" class="btn btn-default" id="btnDelPost" name="btnValue" value="삭제"/>
+							<input type="submit" class="btn btn-default" id="btnAnsPost" name="btnValue" value="답글"/>
 						</div>
 					</div>
 				</form>

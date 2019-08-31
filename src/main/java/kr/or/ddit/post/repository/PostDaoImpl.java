@@ -60,5 +60,10 @@ public class PostDaoImpl implements IPostDao {
 	public int getPostSeq(SqlSession sqlSession) {
 		return sqlSession.selectOne("post.getPostSeq");
 	}
+
+	@Override
+	public List<PostVo> allPostList(SqlSession sqlSession, int boardNum) {
+		return sqlSession.selectList("post.allPostList", boardNum);
+	}
 	
 }

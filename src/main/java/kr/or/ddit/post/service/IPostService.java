@@ -11,6 +11,8 @@ import kr.or.ddit.post.model.PostVo;
 
 public interface IPostService {
 
+	public List<PostVo> allPostList(int boardNum);
+	
 	/**
 	* Method : getPostList
 	* 작성자 : PC-13
@@ -46,5 +48,9 @@ public interface IPostService {
 	public int insertPost(Map map);
 	
 	public int insertPost2(Map map);
+	
+	public int getPostSeq();
+	
+	public int insertAtf(AttachedfileVo atfVo);
 	
 }

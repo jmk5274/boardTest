@@ -11,6 +11,8 @@ import kr.or.ddit.post.model.PostVo;
 
 public interface IPostDao {
 	
+	public List<PostVo> allPostList(SqlSession sqlSession, int boardNum);
+	
 	/**
 	* Method : getPostList
 	* 작성자 : PC-13

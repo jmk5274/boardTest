@@ -30,6 +30,7 @@
 <body>
 <form id="frm" action="${cp }/selectPost" method="get">
 	<input type="hidden" id="postNum" name="postNum"/>
+	<input type="hidden" id="boardNum" name="boardNum" value="${boardNum }"/>
 </form>
 
 	<%@ include file="/commonJsp/header.jsp"%>
@@ -89,7 +90,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-							 				<a href="${cp }/post?page=${page-1}" aria-label="Previous">
+							 				<a href="${cp }/post?page=${page-1}&boardNum=${boardNum}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
 											</a>
 									</c:otherwise>
@@ -102,7 +103,7 @@
 											<li class=active><span>${i }</span></li>
 										</c:when>
 										<c:otherwise>
-											<li><a href="${cp }/post?page=${i }">${i }</a></li>
+											<li><a href="${cp }/post?page=${i }&boardNum=${boardNum}">${i }</a></li>
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
@@ -114,7 +115,7 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-							 				<a href="${cp }/post?page=${page+1}" aria-label="Next">
+							 				<a href="${cp }/post?page=${page+1}&boardNum=${boardNum}" aria-label="Next">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 									</c:otherwise>

@@ -30,6 +30,7 @@ public class SelectPostController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String postNum = request.getParameter("postNum");
+		String boardNum = request.getParameter("boardNum");
 		
 		if(postNum==null) {
 			postNum = (String) request.getAttribute("postNum");
@@ -40,6 +41,7 @@ public class SelectPostController extends HttpServlet {
 		PostVo pvo = (PostVo) map.get("pvo");
 		List<CommentsVo> cmtList = (List<CommentsVo>) map.get("cmtList");
 		
+		request.setAttribute("boardNum", boardNum);
 		request.setAttribute("pvo", pvo);
 		request.setAttribute("cmtList", cmtList);
 		
