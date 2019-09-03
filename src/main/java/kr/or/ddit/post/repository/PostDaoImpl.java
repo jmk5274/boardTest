@@ -65,5 +65,36 @@ public class PostDaoImpl implements IPostDao {
 	public List<PostVo> allPostList(SqlSession sqlSession, int boardNum) {
 		return sqlSession.selectList("post.allPostList", boardNum);
 	}
+
+	@Override
+	public int deletePost(SqlSession sqlSession, PostVo postVo) {
+		return sqlSession.update("post.deletePost", postVo);
+	}
+
+	@Override
+	public int updatePost(SqlSession sqlSession, PostVo postVo) {
+		return sqlSession.update("post.updatePost", postVo);
+	}
+
+	@Override
+	public List<AttachedfileVo> getAttachedFile(SqlSession sqlSession, int postnum) {
+		return sqlSession.selectList("atf.getAttachedFile", postnum);
+	}
+
+	@Override
+	public int deleteAtf(SqlSession sqlSession, int atfnum) {
+		return sqlSession.delete("atf.deleteAtf", atfnum);
+	}
+
+	@Override
+	public int deleteCmt(SqlSession sqlSession, int cmtnum) {
+		return sqlSession.update("comments.deleteCmt", cmtnum);
+	}
+
+	@Override
+	public AttachedfileVo selectAtf(SqlSession sqlSession, int atfnum) {
+		return sqlSession.selectOne("atf.selectAtf", atfnum);
+	}
+	
 	
 }

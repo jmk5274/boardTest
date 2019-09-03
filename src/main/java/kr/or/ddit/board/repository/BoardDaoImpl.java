@@ -31,6 +31,11 @@ public class BoardDaoImpl implements IBoardDao {
 	public int updateBoard(SqlSession sqlSession, BoardVo bvo) {
 		return sqlSession.update("board.updateBoard", bvo);
 	}
+
+	@Override
+	public BoardVo getBoard(SqlSession sqlSession, int boardnum) {
+		return sqlSession.selectOne("board.getBoard", boardnum);
+	}
 	
 	
 }

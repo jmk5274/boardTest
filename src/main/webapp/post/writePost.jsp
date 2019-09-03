@@ -55,7 +55,15 @@ $(document).ready(function() {
 				$("#frm").submit();
 			}
 		}
-	})
+	});
+	
+	$("#attachedFile").change(function(){
+		if(this.files.length > (5-$(".x").length)){
+	         alert("파일의 갯수는 5개를 초과할 수 없습니다.");
+	         $(this).val("");
+		}
+	});
+	
 });
 
 // 필수값 Check
@@ -98,7 +106,7 @@ function validation(){
 						<label for="postNm" class="col-sm-2 control-label">제목</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="postNm" name="postNm"
-								placeholder="TITLE" value=""/>
+								placeholder="TITLE" />
 						</div>
 					</div>
 

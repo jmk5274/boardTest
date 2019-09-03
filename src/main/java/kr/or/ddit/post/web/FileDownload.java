@@ -1,41 +1,51 @@
 package kr.or.ddit.post.web;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.or.ddit.post.model.AttachedfileVo;
 import kr.or.ddit.post.service.IPostService;
 import kr.or.ddit.post.service.PostServiceImpl;
 
-@WebServlet("/deleteCmt")
-public class DeleteCmt extends HttpServlet {
+@WebServlet("/fileDownload")
+public class FileDownload extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private IPostService serv;
-       
+
 	@Override
 	public void init() throws ServletException {
 		serv = PostServiceImpl.getInstance();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		
-		String boardNum = request.getParameter("boardNum");
-		String postNum = request.getParameter("postNum");
-		String cmtNum = request.getParameter("cmtNum");
+		String atfnum = request.getParameter("atfnum");
 		
-		int cnt = serv.deleteCmt(Integer.parseInt(cmtNum));
+		AttachedfileVo avo = serv.selectAtf(Integer.parseInt(atfnum));
 		
-		request.setAttribute("postNum", postNum);
-		request.setAttribute("boardNum", request.getAttribute("boardNum"));
+		ServletOutputStream sos = response.getOutputStream();
 		
-		request.getRequestDispatcher("/selectPost").forward(request, response);;
+		File file = new File(avo.getAtfpath());
+		
+		FileInputStream fis = new FileInputStream(file);
+		
+		byte[] buff =new byte[512];
+		int len = 0;
+		
+		while((len = fis.read(buff, 0, 512)) != -1) {
+			sos.write(buff,0,len);
+		}
+		
+		fis.close();
 	}
 
 }

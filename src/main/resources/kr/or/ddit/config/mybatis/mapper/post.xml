@@ -38,4 +38,12 @@
    			values(#{postnum}, #{postnm}, #{postcont}, sysdate, 'N', #{userid}, #{boardnum}, #{postnum2}, #{gn})
 	</insert>
 	
+	<update id="deletePost" parameterType="postVo">
+		update post set delstatus=#{delstatus} where postnum=#{postnum}
+	</update>
+	
+	<update id="updatePost" parameterType="postVo">
+		update post set postnm=#{postnm}, postcont=#{postcont}, postdate=sysdate where postnum=#{postnum}
+	</update>
+	
 </mapper>

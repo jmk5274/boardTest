@@ -14,4 +14,5 @@ public interface IBoardService {
 	
 	public int updateBoard(BoardVo bvo);
 	
+	public BoardVo getBoard(int boardnum);
 }

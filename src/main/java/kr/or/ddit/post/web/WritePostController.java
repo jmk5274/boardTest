@@ -1,8 +1,10 @@
 package kr.or.ddit.post.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -35,6 +37,8 @@ public class WritePostController extends HttpServlet {
     
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String boardNum = request.getParameter("boardNum");
+	
+		request.setAttribute("postNum", "");
 		request.setAttribute("boardNum", boardNum);
 		
 		request.getRequestDispatcher("post/writePost.jsp").forward(request, response);
@@ -46,9 +50,10 @@ public class WritePostController extends HttpServlet {
 		UserVo uvo = (UserVo) session.getAttribute("userVo");
 		PostVo pvo = new PostVo();
 		int seq = serv.getPostSeq();
-		
+		String boardNum = request.getParameter("boardNum");
 		String postNum2 = request.getParameter("postNum2");	
 		Map<String, Object> map = new HashMap<String, Object>();
+		
 		
 		if(postNum2.equals("")) {
 			pvo.setPostnum(seq);
@@ -72,7 +77,6 @@ public class WritePostController extends HttpServlet {
 			map.put("pvo", pvo);
 			
 			serv.insertPost2(map);
-			
 		}
 		
 		Collection<Part> parts = request.getParts();
@@ -95,12 +99,18 @@ public class WritePostController extends HttpServlet {
 					avo.setAtfnm(filename);
 					
 					serv.insertAtf(avo);
+					
+					String res = "저장 성공";
+					
+					request.setAttribute("boardNum", boardNum);
+					request.setAttribute("res", res);
 				}
 			}
 		} 
+		request.setAttribute("postNum", seq);
+		request.setAttribute("boardNum", boardNum);
 		
-		request.setAttribute("boardNum", request.getParameter("boardNum"));
-		request.getRequestDispatcher("/post").forward(request, response);
+		request.getRequestDispatcher("/selectPost").forward(request, response);
 		
 	}
 }

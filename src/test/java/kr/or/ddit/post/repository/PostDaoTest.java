@@ -45,7 +45,7 @@ public class PostDaoTest {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("boardnum", boardNum);
+		map.put("boardNum", boardNum);
 		map.put("page", page);
 		map.put("pagesize", pagesize);
 		
@@ -155,5 +155,84 @@ public class PostDaoTest {
 		
 		/***Then***/
 		assertEquals(1, cnt);
+	}
+	
+	@Test 
+	public void deletePost() {
+		/***Given***/
+		PostVo pvo = new PostVo();
+		pvo.setDelstatus("Y");
+		pvo.setPostnum(32);
+		
+		/***When***/
+		int cnt = dao.deletePost(sqlSession, pvo);
+		sqlSession.commit();
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void updatePost() {
+		/***Given***/
+		PostVo pvo = new PostVo();
+		pvo.setPostnm("수정테스트");
+		pvo.setPostcont("수정테스트입니다.");
+		pvo.setPostnum(30);
+		
+		/***When***/
+		int cnt = dao.updatePost(sqlSession, pvo);
+		sqlSession.commit();
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void getAttachedFile() {
+		/***Given***/
+		int postnum = 22;
+
+		/***When***/
+		List<AttachedfileVo> list = dao.getAttachedFile(sqlSession, postnum);
+		
+		/***Then***/
+		assertEquals(3, list.size());
+	}
+			
+	@Test
+	public void deleteAtf() {
+		/***Given***/
+		int atfnum = 18;
+
+		/***When***/
+		int cnt = dao.deleteAtf(sqlSession, atfnum);
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void deleteCmt() {
+		/***Given***/
+		int cmtnum=19;
+
+		/***When***/
+		int cnt = dao.deleteCmt(sqlSession, cmtnum);
+				
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void selectAtf() {
+		/***Given***/
+		int atfnum=12;
+
+		/***When***/
+		AttachedfileVo avo = dao.selectAtf(sqlSession, atfnum);
+		
+		/***Then***/
+		assertEquals(12, avo.getAtfnum());
 	}
 }

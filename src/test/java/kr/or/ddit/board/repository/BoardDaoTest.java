@@ -73,4 +73,14 @@ public class BoardDaoTest {
 		assertEquals(1, cnt);
 	}
 
+	@Test
+	public void getBoard() {
+		/***Given***/
+		int boardnum = 1;
+		/***When***/
+		BoardVo bvo = dao.getBoard(sqlSession, boardnum);
+	
+		/***Then***/
+		assertEquals(1, bvo.getBoardnum());
+	}
 }

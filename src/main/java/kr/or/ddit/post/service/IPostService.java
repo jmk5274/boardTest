@@ -53,4 +53,15 @@ public interface IPostService {
 	
 	public int insertAtf(AttachedfileVo atfVo);
 	
+	public int deletePost(PostVo postVo);
+	
+	public int updatePost(PostVo postVo);
+	
+	public List<AttachedfileVo> getAttachedFile(int postnum);
+	
+	public int deleteAtf(int atfnum);
+	
+	public int deleteCmt(int cmtnum);
+	
+	public AttachedfileVo selectAtf(int atfnum);
 }

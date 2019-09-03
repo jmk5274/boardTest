@@ -64,4 +64,17 @@ public interface IPostDao {
 	public int insertPost2(SqlSession sqlSession, PostVo postVo);
 	
 	public int insertAtf(SqlSession sqlSession, AttachedfileVo atfVo);
+	
+	public int deletePost(SqlSession sqlSession, PostVo postVo);
+	
+	public int updatePost(SqlSession sqlSession, PostVo postVo);
+	
+	public List<AttachedfileVo> getAttachedFile(SqlSession sqlSession, int postnum);
+	
+	public int deleteAtf(SqlSession sqlSession, int atfnum);
+	
+	public int deleteCmt(SqlSession sqlSession, int cmtnum);
+	
+	public AttachedfileVo selectAtf(SqlSession sqlSession, int atfnum);
+
 }

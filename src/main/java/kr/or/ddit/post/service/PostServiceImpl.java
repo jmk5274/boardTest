@@ -110,5 +110,58 @@ public class PostServiceImpl implements IPostService {
 		sqlSession.close();
 		return cnt;
 	}
+
+	@Override
+	public int deletePost(PostVo postVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int cnt = dao.deletePost(sqlSession, postVo);
+		sqlSession.commit();
+		sqlSession.close();
+		return cnt;
+	}
+
+	@Override
+	public int updatePost(PostVo postVo) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int cnt = dao.updatePost(sqlSession, postVo);
+		sqlSession.commit();
+		sqlSession.close();
+		return cnt;
+	}
+
+	@Override
+	public List<AttachedfileVo> getAttachedFile(int postnum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		List<AttachedfileVo> list = dao.getAttachedFile(sqlSession, postnum);
+		sqlSession.commit();
+		sqlSession.close();
+		return list;
+	}
+
+	@Override
+	public int deleteAtf(int atfnum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int cnt = dao.deleteAtf(sqlSession, atfnum);
+		sqlSession.commit();
+		sqlSession.close();
+		return cnt;
+	}
+
+	@Override
+	public int deleteCmt(int cmtnum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		int cnt = dao.deleteCmt(sqlSession, cmtnum);
+		sqlSession.commit();
+		sqlSession.close();
+		return cnt;
+	}
+
+	@Override
+	public AttachedfileVo selectAtf(int atfnum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		AttachedfileVo avo = dao.selectAtf(sqlSession, atfnum);
+		sqlSession.close();
+		return avo;
+	}
 	
 }

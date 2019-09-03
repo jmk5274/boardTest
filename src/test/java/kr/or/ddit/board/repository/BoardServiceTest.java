@@ -69,5 +69,17 @@ public class BoardServiceTest {
 		/***Then***/
 		assertEquals(1, cnt);
 	}
+	
+	@Test
+	public void getBoard() {
+		/***Given***/
+		int boardnum = 1;
+
+		/***When***/
+		BoardVo bvo = serv.getBoard(boardnum);
+		
+		/***Then***/
+		assertEquals(1, bvo.getBoardnum());
+	}
 
 }

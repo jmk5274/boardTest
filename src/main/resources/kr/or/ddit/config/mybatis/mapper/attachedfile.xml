@@ -8,4 +8,17 @@
     		values(attachedfile_seq.nextval, #{atfnm}, #{atfpath}, #{postnum})
 	</insert>
 
+	<select id="getAttachedFile" parameterType="int" resultType="atfVo">
+		select *
+		  from attachedfile
+		 where postnum = #{postnum}
+	</select>
+	
+	<delete id="deleteAtf" parameterType="int">
+		delete from attachedfile where atfnum=#{atfnum}
+	</delete>
+	
+	<select id="selectAtf" parameterType="int" resultType="atfVo">
+		select * from attachedfile where atfnum=#{atfnum} 
+	</select>
 </mapper>

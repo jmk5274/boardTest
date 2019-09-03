@@ -18,11 +18,17 @@
 <%@ include file="/commonJsp/basicLib.jsp"%>
 <script>
 	$(document).ready(function(){
+		
+		if("${res }"){
+			alert("${res }");
+		}
+		
 		$(".postTr").on("click", function(){
 			var postNum = $(this).data("postnum");
 			$("#postNum").val(postNum);
 			$("#frm").submit();
 		});
+		
 	});
 </script>
 </head>
@@ -31,6 +37,7 @@
 <form id="frm" action="${cp }/selectPost" method="get">
 	<input type="hidden" id="postNum" name="postNum"/>
 	<input type="hidden" id="boardNum" name="boardNum" value="${boardNum }"/>
+	<input type="hidden" id="boardNm" name="boardNm" value="${boardnm }"/>
 </form>
 
 	<%@ include file="/commonJsp/header.jsp"%>
@@ -60,8 +67,16 @@
 								</tr>
 
 								<c:forEach items="${postList }" var="list">
-									<tr class="postTr" data-postnum="${ list.postnum }">
+									<c:choose>
+										<c:when test="${list.delstatus=='N' }">
+											<tr class="postTr" data-postnum="${ list.postnum }">
+										</c:when>
+										<c:otherwise>
+											<tr class="postTr" data-postnum="삭제">
+										</c:otherwise>
+									</c:choose>
 										<td>${list.postnum }</td>
+										
 										<td>
 										<c:forEach begin="0" end="${(list.level-1)*2 }" var="i">
 											&nbsp;
@@ -69,7 +84,16 @@
 										<c:if test="${(list.level-1)*2 != 0 }">
 											[답글]
 										</c:if>
-										${list.postnm }</td>
+										
+										<c:choose>
+											<c:when test="${list.delstatus == 'Y' }">
+												삭제된 게시글입니다.
+											</c:when>
+											<c:otherwise>
+												${list.postnm }
+											</c:otherwise>										
+										</c:choose>
+										</td>
 										
 										<td>${list.userid }</td>
 										<td>${list.postdate_fmt }</td>
@@ -83,6 +107,7 @@
 						<div class="text-center">
 							<ul class="pagination">
 								<%-- 이전 페이지 가기 : 지금 있는 페이지에서 한페이지 전으로 --%>
+								
 								<c:choose>
 									<c:when test="${page == 1 }">
 										<li class="disabled">
@@ -90,8 +115,22 @@
 									</c:when>
 									<c:otherwise>
 										<li>
-							 				<a href="${cp }/post?page=${page-1}&boardNum=${boardNum}" aria-label="Previous">
+							 				<a href="${cp }/post?page=1&boardNum=${boardNum}" aria-label="Previous">
 												<span aria-hidden="true">&laquo;</span>
+											</a>
+									</c:otherwise>
+								</c:choose>
+										</li>
+										
+								<c:choose>
+									<c:when test="${page == 1 }">
+										<li class="disabled">
+											<span aria-label="Previous">&lt;</span>
+									</c:when>
+									<c:otherwise>
+										<li>
+							 				<a href="${cp }/post?page=${page-1}&boardNum=${boardNum}" aria-label="Previous">
+												<span aria-hidden="true">&lt;</span>
 											</a>
 									</c:otherwise>
 								</c:choose>
@@ -109,13 +148,27 @@
 								</c:forEach>
 								
 								<c:choose>
-									<c:when test="${page == paginationSize }">
+									<c:when test="${page == paginationSize || paginationSize == 0}">
+										<li class="disabled">
+											<span aria-label="Previous">&gt;</span>
+									</c:when>
+									<c:otherwise>
+										<li>
+							 				<a href="${cp }/post?page=${page+1}&boardNum=${boardNum}" aria-label="Next">
+												<span aria-hidden="true">&gt;</span>
+											</a>
+									</c:otherwise>
+								</c:choose>
+										</li>
+								
+								<c:choose>
+									<c:when test="${page == paginationSize || paginationSize == 0}">
 										<li class="disabled">
 											<span aria-label="Previous">&raquo;</span>
 									</c:when>
 									<c:otherwise>
 										<li>
-							 				<a href="${cp }/post?page=${page+1}&boardNum=${boardNum}" aria-label="Next">
+							 				<a href="${cp }/post?page=${paginationSize }&boardNum=${boardNum}" aria-label="Previous">
 												<span aria-hidden="true">&raquo;</span>
 											</a>
 									</c:otherwise>

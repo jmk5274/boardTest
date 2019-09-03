@@ -17,4 +17,8 @@
   		update board1 set usestatus=#{usestatus}, boardnm=#{boardnm}
         where boardnum = #{boardnum}
   	</update>
+  	
+  	<select id="getBoard" parameterType="int" resultType="boardVo">
+  		select * from board1 where boardnum=#{boardnum}
+  	</select>
   </mapper>

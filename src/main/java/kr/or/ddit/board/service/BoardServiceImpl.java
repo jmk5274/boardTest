@@ -48,4 +48,13 @@ public class BoardServiceImpl implements IBoardService {
 		sqlSession.close();
 		return cnt;
 	}
+
+	@Override
+	public BoardVo getBoard(int boardnum) {
+		SqlSession sqlSession = MybatisUtil.getSession();
+		BoardVo bvo = dao.getBoard(sqlSession, boardnum);
+		sqlSession.commit();
+		sqlSession.close();
+		return bvo;
+	}
 }

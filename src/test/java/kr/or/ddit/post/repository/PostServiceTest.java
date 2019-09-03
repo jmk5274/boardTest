@@ -12,6 +12,7 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import kr.or.ddit.post.model.AttachedfileVo;
 import kr.or.ddit.post.model.CommentsVo;
 import kr.or.ddit.post.model.PostVo;
 import kr.or.ddit.post.service.IPostService;
@@ -79,4 +80,80 @@ public class PostServiceTest {
 		assertEquals(1, cnt);
 	}
 	
+	@Test 
+	public void deletePost() {
+		/***Given***/
+		PostVo pvo = new PostVo();
+		pvo.setDelstatus("Y");
+		pvo.setPostnum(32);
+		
+		/***When***/
+		int cnt = serv.deletePost(pvo);
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void updatePost() {
+		/***Given***/
+		PostVo pvo = new PostVo();
+		pvo.setPostnm("수정테스트");
+		pvo.setPostcont("수정테스트입니다.");
+		pvo.setPostnum(30);
+		
+		/***When***/
+		int cnt = serv.updatePost(pvo);
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void getAttachedFile() {
+		/***Given***/
+		int postnum = 22;
+
+		/***When***/
+		List<AttachedfileVo> list = serv.getAttachedFile(postnum);
+		
+		/***Then***/
+		assertEquals(3, list.size());
+	}
+	
+	@Test
+	public void deleteAtf() {
+		/***Given***/
+		int atfnum = 18;
+
+		/***When***/
+		int cnt = serv.deleteAtf(atfnum);
+		
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void deleteCmt() {
+		/***Given***/
+		int cmtnum=19;
+
+		/***When***/
+		int cnt = serv.deleteCmt(cmtnum);
+				
+		/***Then***/
+		assertEquals(1, cnt);
+	}
+	
+	@Test
+	public void selectAtf() {
+		/***Given***/
+		int atfnum=12;
+
+		/***When***/
+		AttachedfileVo avo = serv.selectAtf(atfnum);
+
+		/***Then***/
+		assertEquals(12, avo.getAtfnum());
+	}
 }

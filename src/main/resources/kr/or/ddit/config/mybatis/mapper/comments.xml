@@ -5,11 +5,15 @@
 <mapper namespace="comments">
 	<select id="getCmtList" parameterType="int" resultType="cmtVo">
 		select * from comments where postnum = #{data}
-		order by cmtnum desc
+		order by cmtnum
 	</select>
 	
 	<insert id="insertCmt" parameterType="cmtVo">
-		insert into comments (cmtnum, cmtcont, cmtdate, postnum, userid)
-   			values(comments_seq.nextval, #{cmtcont}, sysdate, #{postnum}, #{userid})
+		insert into comments (cmtnum, cmtcont, cmtdate, postnum, userid, delstatus)
+   			values(comments_seq.nextval, #{cmtcont}, sysdate, #{postnum}, #{userid}, 'N')
 	</insert>
+	
+	<update id="deleteCmt" parameterType="int">
+		update comments set delstatus = 'Y' where cmtnum=#{cmtnum}
+	</update>
 </mapper>

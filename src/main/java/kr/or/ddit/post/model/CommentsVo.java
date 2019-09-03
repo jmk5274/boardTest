@@ -10,6 +10,7 @@ public class CommentsVo {
 	private Date cmtdate;
 	private int postnum;
 	private String userid;
+	private String delstatus;
 
 	public CommentsVo() {
 	}
@@ -20,6 +21,14 @@ public class CommentsVo {
 		this.cmtdate = cmtdate;
 		this.postnum = postnum;
 		this.userid = userid;
+	}
+
+	public String getDelstatus() {
+		return delstatus;
+	}
+
+	public void setDelstatus(String delstatus) {
+		this.delstatus = delstatus;
 	}
 
 	public int getCmtnum() {
