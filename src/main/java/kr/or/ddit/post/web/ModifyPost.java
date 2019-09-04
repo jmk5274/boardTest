@@ -1,6 +1,7 @@
 package kr.or.ddit.post.web;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -105,6 +106,28 @@ public class ModifyPost extends HttpServlet {
 		pvo.setPostcont(postCont);
 		
 		serv.updatePost(pvo);
+		
+		List<AttachedfileVo> avoList = serv.getAttachedFile(Integer.parseInt(postNum2));
+		String files[] = request.getParameterValues("file");
+		
+		List<Integer> atfnumList = new ArrayList<Integer>();
+		
+		for(AttachedfileVo atfVo : avoList) {
+			atfnumList.add(atfVo.getAtfnum());
+		}
+		
+		for(int atfnum : atfnumList) {
+			boolean flag = true;
+			for(String filenum : files) {
+				if(atfnum == Integer.parseInt(filenum)) {
+					flag = false;
+					break;
+				}
+			}
+			if(flag) {
+				serv.deleteAtf(atfnum);
+			}
+		}
 		
 		for(Part p : parts) {
 			if("attachedFile".equals(p.getName())){

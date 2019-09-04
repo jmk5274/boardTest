@@ -61,7 +61,7 @@ public class BoardServiceTest {
 		/***Given***/
 		Date date = new SimpleDateFormat("yyyyMMdd").parse("20190603");
 		
-		BoardVo bvo = new BoardVo(1, null, "Y", null, null);
+		BoardVo bvo = new BoardVo(1, "자유게시판", "Y", null, null);
 		
 		/***When***/
 		int cnt = serv.updateBoard(bvo);

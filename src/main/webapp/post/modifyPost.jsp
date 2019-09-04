@@ -49,7 +49,7 @@ $(document).ready(function() {
 		if(confirm("저장하시겠습니까?")) {
 			// id가 smarteditor인 textarea에 에디터에서 대입
 			oEditors.getById["smarteditor"].exec("UPDATE_CONTENTS_FIELD", []);
-
+		
 			// 이부분에 에디터 validation 검증
 			if(validation()) {
 				$("#frm").submit();
@@ -58,14 +58,22 @@ $(document).ready(function() {
 	})
 	
 	$(".x").click(function(){
-		var atfnum = $(this).prev().data("atfnum");
-		$("#atfNum").val(atfnum);
+		$(this).closest('.attached').remove();
+// 		$(this).prev().prev().remove();
+// 		$(this).prev().remove();
+// 		$(this).next().remove();
+// 		$(this).remove();
 		
-		$("#hiddenFrm").submit();
+// 		$("#atfNum").val(atfnum);
+// 		var postNm = $("#postNm2").val();
+// 		$("#postNm").val(postNm);
+// 		var postCont = $("#smarteditor").html();
+// 		$("#postCont").val(postCont);
+		
+// 		$("#hiddenFrm").submit();
 	});
 	
 	$("#attachedFile").change(function(){
-		console.log("length: " + this.files.length);
 		if(this.files.length > (5-$(".x").length)){
 	         alert("파일의 갯수는 5개를 초과할 수 없습니다.");
 	         $(this).val("");
@@ -90,14 +98,14 @@ function validation(){
 </head>
 
 <body>
-<form id="hiddenFrm" action="${cp }/deleteAtf" method="post">
-	<input id="atfNum" name="atfNum" type="hidden">
-	<input id="boardNum" name="boardNum" value="${boardNum }" type="hidden">
-	<input id="postNum2" name="postNum2" value="${postNum2 }" type="hidden">
-	<input id="postNm" name="postNm" value="${pvo.postnm }" type="hidden">
-	<input id="postCont" name="postCont" value="${pvo.postcont }" type="hidden">
-	<input id="userId" name="userId" value="${pvo.userid }" type="hidden">
-</form>
+<%-- <form id="hiddenFrm" action="${cp }/deleteAtf" method="post"> --%>
+<!-- 	<input id="atfNum" name="atfNum" type="hidden"> -->
+<%-- 	<input id="boardNum" name="boardNum" value="${boardNum }" type="hidden"> --%>
+<%-- 	<input id="postNum2" name="postNum2" value="${postNum2 }" type="hidden"> --%>
+<!-- 	<input id="postNm" name="postNm" value="" type="hidden"> -->
+<!-- 	<input id="postCont" name="postCont" value="" type="hidden"> -->
+<%-- 	<input id="userId" name="userId" value="${pvo.userid }" type="hidden"> --%>
+<!-- </form> -->
 
 	<!-- header -->
 	<%@ include file="/commonJsp/header.jsp"%>
@@ -121,7 +129,7 @@ function validation(){
 						<input type="hidden" name="gn" value="${gn }"/>
 						<label for="postNm" class="col-sm-2 control-label">제목</label>
 						<div class="col-sm-6">
-							<input type="text" class="form-control" id="postNm" name="postNm"
+							<input type="text" class="form-control" id="postNm2" name="postNm"
 								placeholder="TITLE" value="${pvo.postnm }"/>
 						</div>
 					</div>
@@ -137,7 +145,10 @@ function validation(){
 						<label for="attachedFile" class="col-sm-2 control-label">첨부파일</label>
 						<div class="col-sm-6">
 							<c:forEach items="${atfList }" var="atf">
-								<label class="control-label" data-atfnum="${atf.atfnum }"> ${atf.atfnm } </label>&nbsp;<span class="x">&times;</span><br>
+							<div class="attached">
+								<input type="hidden" name="file" value="${atf.atfnum }"/>
+								<label class="control-label cmt"> ${atf.atfnm } </label>&nbsp;<span class="x">&times;</span><br>
+							</div>
 							</c:forEach>
 						</div>
 					</div>

@@ -45,24 +45,22 @@
    <div class="col-sm-8 blog-main">
 
       <div class="blog-post">
-         <h2 class="blog-post-title">JSP</h2>
+         <h2 class="blog-post-title">jsp</h2>
          <p class="blog-post-meta">
-            2017.10.30, room 201
+            2019.09.03, room 202
          </p>
 
-         <p>jsp를 통한 웹 프로그래밍 학습</p>
+         <p>jsp를 통한 게시판만들기</p>
          <hr>
          
          <h3>상세내역</h3>
-         <p>JSP과정에서는 다음과 같은 내용을 학습한다.</p>
          <ul>
-            <li>servlet 동작원리</li>
-            <li>jsp와 servlet의 관계</li>
-            <li>jsp 스크립틀릿 요소</li>
-            <li>jsp action tag (standard)</li>
-            <li>jstl</li>
-            <li>db pooling</li>
-            <li>페이지 모듈화</li>
+            <li>로그인</li>
+            <li>게시판 생성/수정</li>
+            <li>게시글 출력/조회/작성/답글/수정/삭제</li>
+            <li>댓글 작성/삭제</li>
+            <li>첨부파일 등록/삭제</li>
+            <li>pagination, 삭제된 게시글,댓글 처리 등등..</li>
          </ul>
       </div>
    </div>

@@ -63,7 +63,7 @@ public class BoardDaoTest {
 	@Test
 	public void updateBoardTest() {
 		/***Given***/
-		BoardVo bvo = new BoardVo(1, null, "Y", null, null);
+		BoardVo bvo = new BoardVo(1, "자유게시판", "Y", null, null);
 
 		/***When***/
 		int cnt = dao.updateBoard(sqlSession, bvo);

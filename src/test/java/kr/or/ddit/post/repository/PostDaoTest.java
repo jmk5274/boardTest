@@ -59,13 +59,13 @@ public class PostDaoTest {
 	@Test
 	public void selectPost() {
 		/***Given***/
-		int postNum = 101;
+		int postNum = 11;
 
 		/***When***/
 		PostVo pvo = dao.selectPost(sqlSession, postNum);
 		
 		/***Then***/
-		assertEquals("테스트1", pvo.getPostnm());
+		assertEquals("테스트", pvo.getPostnm());
 	}
 	
 	@Test

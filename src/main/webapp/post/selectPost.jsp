@@ -71,7 +71,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">글 내용</label>
 						<div class="col-sm-8">
-							<label class="control-label">${pvo.postcont } </label>
+							<label>${pvo.postcont } </label>
 						</div>
 					</div>
 					
@@ -133,8 +133,6 @@
 						</div>
 					</div>
 				</form>
-					
-
 			</div>
 		</div>
 	</div>

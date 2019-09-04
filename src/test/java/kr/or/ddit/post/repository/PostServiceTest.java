@@ -42,7 +42,7 @@ public class PostServiceTest {
 		
 		Map<String, Object> map = new HashMap<String, Object>();
 		
-		map.put("boardnum", boardNum);
+		map.put("boardNum", boardNum);
 		map.put("page", page);
 		map.put("pagesize", pagesize);
 
@@ -56,7 +56,7 @@ public class PostServiceTest {
 	@Test
 	public void selectPost() {
 		/***Given***/
-		int postNum = 101;
+		int postNum = 11;
 
 		/***When***/
 		Map<String, Object> map = serv.selectPost(postNum);
@@ -64,8 +64,8 @@ public class PostServiceTest {
 		List<CommentsVo> cmtList = (List<CommentsVo>) map.get("cmtList");
 		
 		/***Then***/
-		assertEquals("테스트1", pvo.getPostnm());
-		assertEquals(1, cmtList.size());
+		assertEquals("테스트", pvo.getPostnm());
+		assertEquals(0, cmtList.size());
 	}
 	
 	@Test
