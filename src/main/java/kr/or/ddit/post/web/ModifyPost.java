@@ -112,20 +112,27 @@ public class ModifyPost extends HttpServlet {
 		
 		List<Integer> atfnumList = new ArrayList<Integer>();
 		
-		for(AttachedfileVo atfVo : avoList) {
-			atfnumList.add(atfVo.getAtfnum());
-		}
-		
-		for(int atfnum : atfnumList) {
-			boolean flag = true;
-			for(String filenum : files) {
-				if(atfnum == Integer.parseInt(filenum)) {
-					flag = false;
-					break;
-				}
+		if(files==null || files.length == 0) {
+			for(AttachedfileVo atfVo : avoList) {
+				serv.deleteAtf(atfVo.getAtfnum());
 			}
-			if(flag) {
-				serv.deleteAtf(atfnum);
+		}else {
+			
+			for(AttachedfileVo atfVo : avoList) {
+				atfnumList.add(atfVo.getAtfnum());
+			}
+			
+			for(int atfnum : atfnumList) {
+				boolean flag = true;
+				for(String filenum : files) {
+					if(atfnum == Integer.parseInt(filenum)) {
+						flag = false;
+						break;
+					}
+				}
+				if(flag) {
+					serv.deleteAtf(atfnum);
+				}
 			}
 		}
 		
